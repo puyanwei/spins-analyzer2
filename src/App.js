@@ -1,7 +1,13 @@
+import Dropzone from "./Dropzone";
 import "./App.css";
 
-function App() {
-  return <div className="App">HELLO</div>;
-}
+const App = () => {
+  return (
+    <div className="App">
+      <p />
+      <Dropzone />
+    </div>
+  );
+};
 
 export default App;
