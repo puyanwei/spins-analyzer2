@@ -28,7 +28,7 @@ const rejectStyle = {
   borderColor: "#ff1744",
 };
 
-function DropzoneComponent(props) {
+function Dropzone(props) {
   const onDrop = useCallback((acceptedFiles) => {
     console.log(acceptedFiles);
   }, []);
@@ -41,7 +41,7 @@ function DropzoneComponent(props) {
     isDragReject,
   } = useDropzone({
     onDrop,
-    accept: "image/jpeg, image/png",
+    accept: ".txt",
   });
 
   const style = useMemo(
@@ -62,4 +62,6 @@ function DropzoneComponent(props) {
   );
 }
 
-export default DropzoneComponent;
+
+
+export default Dropzone;
