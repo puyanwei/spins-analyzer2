@@ -1,34 +1,13 @@
 import React, { useCallback, useMemo } from "react";
 import { useDropzone } from "react-dropzone";
+import {
+  baseStyle,
+  activeStyle,
+  acceptStyle,
+  rejectStyle,
+} from "./dropzoneStyles";
 
-const baseStyle = {
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  padding: "20px",
-  marginTop: "100px",
-  borderWidth: 2,
-  borderRadius: 2,
-  borderColor: "#eeeeee",
-  borderStyle: "dashed",
-  backgroundColor: "#fafafa",
-  color: "#bdbdbd",
-  transition: "border .3s ease-in-out",
-};
-
-const activeStyle = {
-  borderColor: "#2196f3",
-};
-
-const acceptStyle = {
-  borderColor: "#00e676",
-};
-
-const rejectStyle = {
-  borderColor: "#ff1744",
-};
-
-function Dropzone(props) {
+const Dropzone = (props) => {
   const onDrop = useCallback((acceptedFiles) => {
     console.log(acceptedFiles);
   }, []);
@@ -60,8 +39,6 @@ function Dropzone(props) {
       <div>Drag and drop your images here.</div>
     </div>
   );
-}
-
-
+};
 
 export default Dropzone;
