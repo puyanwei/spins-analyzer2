@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import { useDropzone } from "react-dropzone";
 import {
   baseStyle,
@@ -8,8 +8,14 @@ import {
 } from "./dropzoneStyles";
 
 const Dropzone = (props) => {
+  const [fileText, setFileText] = useState("");
+
   const onDrop = useCallback((acceptedFiles) => {
-    console.log(acceptedFiles);
+    acceptedFiles.forEach((file) => {
+      const fileReader = new FileReader();
+      fileReader.onload = (e) => setFileText(e.target.result);
+      fileReader.readAsText(file);
+    });
   }, []);
 
   const {
@@ -34,10 +40,14 @@ const Dropzone = (props) => {
   );
 
   return (
-    <div {...getRootProps({ style })}>
-      <input {...getInputProps()} />
-      <div>Drag and drop your images here.</div>
-    </div>
+    <>
+      <div {...getRootProps({ style })}>
+        <input {...getInputProps()} />
+        <div>Drag and drop your images here.</div>
+      </div>
+      <br />
+      {fileText}
+    </>
   );
 };
 
