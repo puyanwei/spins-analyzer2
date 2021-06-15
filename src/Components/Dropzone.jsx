@@ -10,16 +10,22 @@ import {
 const Dropzone = (props) => {
   const [fileText, setFileText] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
-
+  const [failMsg, setFailMsg] = useState("");
 
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
     acceptedFiles.forEach((file) => {
       const fileReader = new FileReader();
       fileReader.onload = (e) => setFileText(e.target.result);
-      fileReader.readAsText(file);
-    });
+      fileReader.readAsText(file)
+  .then(console.log(fileText))
+  ;
+    })
+    
+    ;
+    if(fileText.includes('PokerStars') === false) setFailMsg('boo')
     if(rejectedFiles) setErrorMsg('File type invalid - please submit a .txt file and try again');  
-  }, []);
+  }
+  , []);
 
 
   const {
@@ -50,8 +56,9 @@ const Dropzone = (props) => {
         <div>Drag and drop your images here.</div>
       </div>
       <br />
-      {fileText}
+      {failMsg}
       {errorMsg}
+
     </>
   );
 };
