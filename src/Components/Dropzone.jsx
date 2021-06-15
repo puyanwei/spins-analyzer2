@@ -9,14 +9,18 @@ import {
 
 const Dropzone = (props) => {
   const [fileText, setFileText] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
-  const onDrop = useCallback((acceptedFiles) => {
+
+  const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
     acceptedFiles.forEach((file) => {
       const fileReader = new FileReader();
       fileReader.onload = (e) => setFileText(e.target.result);
       fileReader.readAsText(file);
     });
+    if(rejectedFiles) setErrorMsg('File type invalid - please submit a .txt file and try again');  
   }, []);
+
 
   const {
     getRootProps,
@@ -47,6 +51,7 @@ const Dropzone = (props) => {
       </div>
       <br />
       {fileText}
+      {errorMsg}
     </>
   );
 };

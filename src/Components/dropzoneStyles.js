@@ -1,4 +1,4 @@
-export const baseStyle = {
+ const baseStyle = {
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
@@ -13,14 +13,16 @@ export const baseStyle = {
   transition: "border .3s ease-in-out",
 };
 
-export const activeStyle = {
+ const activeStyle = {
   borderColor: "#2196f3",
 };
 
-export const acceptStyle = {
+ const acceptStyle = {
   borderColor: "#00e676",
 };
 
-export const rejectStyle = {
+ const rejectStyle = {
   borderColor: "#ff1744",
 };
+
+export {baseStyle, acceptStyle, rejectStyle, activeStyle}
