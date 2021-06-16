@@ -13,20 +13,30 @@ const Dropzone = (props) => {
   const [errorMsg, setErrorMsg] = useState("");
   const [postData, setPostData] = useState({});
 
-  console.log(`postData`, postData);
+  const rejectedFileTypeErrorMessage = `File type invalid. Please submit a .txt file and try again`;
+  const rejectedTextFileErrorMessage = `Pokerstars hand history file not recognised. Please try again`;
+  const successMessage = `Successfully uploaded`;
 
-  const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
-    acceptedFiles.forEach((file) => {
-      const fileReader = new FileReader();
-      fileReader.readAsText(file);
-      fileReader.onload = (e) =>
-        setPostData(spinFileFormatter(e.target.result));
-    });
-    if (rejectedFiles)
-      setErrorMsg(
-        "File type invalid - please submit a .txt file and try again"
-      );
-  }, []);
+  // console.log(`postData`, postData);
+
+  const onDrop = useCallback(
+    (acceptedFiles, rejectedFiles) => {
+      acceptedFiles.forEach((file) => {
+        const fileReader = new FileReader();
+        fileReader.readAsText(file);
+        fileReader.onload = (e) => {
+          if (e.target.result.includes(`PokerStars Tournament #`)) {
+            setPostData(spinFileFormatter(e.target.result));
+            setErrorMsg(successMessage);
+          } else {
+            setErrorMsg(rejectedTextFileErrorMessage);
+          }
+        };
+      });
+      if (rejectedFiles) setErrorMsg(rejectedFileTypeErrorMessage);
+    },
+    [rejectedFileTypeErrorMessage, rejectedTextFileErrorMessage, successMessage]
+  );
 
   const {
     getRootProps,
