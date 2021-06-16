@@ -6,27 +6,27 @@ import {
   acceptStyle,
   rejectStyle,
 } from "./dropzoneStyles";
+import { spinFileFormatter } from "../Utilities/spinFileFormatter";
 
 const Dropzone = (props) => {
-  const [fileText, setFileText] = useState("");
+  // const [fileText, setFileText] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
-  const [failMsg, setFailMsg] = useState("");
+  const [postData, setPostData] = useState({});
+
+  console.log(`postData`, postData);
 
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
     acceptedFiles.forEach((file) => {
       const fileReader = new FileReader();
-      fileReader.onload = (e) => setFileText(e.target.result);
-      fileReader.readAsText(file)
-  .then(console.log(fileText))
-  ;
-    })
-    
-    ;
-    if(fileText.includes('PokerStars') === false) setFailMsg('boo')
-    if(rejectedFiles) setErrorMsg('File type invalid - please submit a .txt file and try again');  
-  }
-  , []);
-
+      fileReader.readAsText(file);
+      fileReader.onload = (e) =>
+        setPostData(spinFileFormatter(e.target.result));
+    });
+    if (rejectedFiles)
+      setErrorMsg(
+        "File type invalid - please submit a .txt file and try again"
+      );
+  }, []);
 
   const {
     getRootProps,
@@ -56,9 +56,7 @@ const Dropzone = (props) => {
         <div>Drag and drop your images here.</div>
       </div>
       <br />
-      {failMsg}
       {errorMsg}
-
     </>
   );
 };
