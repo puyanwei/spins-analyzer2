@@ -11,13 +11,11 @@ import { spinFileFormatter } from "../Utilities/spinFileFormatter";
 const Dropzone = (props) => {
   // const [fileText, setFileText] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
-  const [postData, setPostData] = useState({});
+  // const [postData, setPostData] = useState({});
 
   const rejectedFileTypeErrorMessage = `File type invalid. Please submit a .txt file and try again`;
   const rejectedTextFileErrorMessage = `Pokerstars hand history file not recognised. Please try again`;
   const successMessage = `Successfully uploaded`;
-
-  // console.log(`postData`, postData);
 
   const onDrop = useCallback(
     (acceptedFiles, rejectedFiles) => {
@@ -26,7 +24,14 @@ const Dropzone = (props) => {
         fileReader.readAsText(file);
         fileReader.onload = (e) => {
           if (e.target.result.includes(`PokerStars Tournament #`)) {
-            setPostData(spinFileFormatter(e.target.result));
+            fetch("http://localhost:5000/data", {
+              method: "post",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(spinFileFormatter(e.target.result)),
+            });
             setErrorMsg(successMessage);
           } else {
             setErrorMsg(rejectedTextFileErrorMessage);
