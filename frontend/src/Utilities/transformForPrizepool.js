@@ -16,7 +16,7 @@ const transformForPrizepool = (data) => {
       x: `${key} \n ${getPercentage(value, total)}%`,
       y: value,
     });
-  },
+  }
   return array;
 };
 
