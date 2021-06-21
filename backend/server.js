@@ -1,15 +1,22 @@
+import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
-import express from "express";
+
 import { handHistoryModel } from "./models/handHistory.js";
 
 const app = express();
 app.use(cors());
 
 const mongoDb = "mongodb://localhost/spinAnalyser";
-mongoose.connect(mongoDb, { useNewUrlParser: true, useUnifiedTopology: true });
-const db = mongoose.connection;
-db.on("error", (error) => console.error("MongoDB connection error:"));
+mongoose.connect(mongoDb, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+});
+
+mongoose.connection.on("error", (error) =>
+  console.error("MongoDB connection error:")
+);
 
 app.listen(5000, () => console.log("listening on 5000"));
 app.use(express.urlencoded({ extended: true }));

@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const handHistorySchema = new mongoose.Schema(
   {
-    tournamentNumber: String,
+    tournamentNumber: { type: String, required: true, unique: true },
     buyIn: String,
     rake: String,
     totalBuyIn: String,
@@ -20,6 +20,6 @@ const handHistorySchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const handHistoryModel = mongoose.model("handHistory", handHistorySchema);
+const handHistoryModel = mongoose.model("Hand History", handHistorySchema);
 
 export { handHistoryModel };
