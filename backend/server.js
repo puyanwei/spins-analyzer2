@@ -22,20 +22,23 @@ app.listen(5000, () => console.log("listening on 5000"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.post("/data", async (req, res) =>
-  new handHistoryModel(req.body)
-    .save()
-    .then((item) => {
-      res.send("Name saved to database");
-      console.log("Success");
-    })
-    .catch((err) => {
-      res.status(400).send("Unable to save to database");
-      console.log(err);
-    })
-);
+app.post("/data", async (req, res) => {
+  try {
+    const handHistory = await handHistoryModel(req.body);
+    await handHistory.save();
+    console.log("Success");
+  } catch (error) {
+    res.status(500).send("Unable to save to database");
+    console.log(error);
+  }
+});
 
 app.get("/data", async (req, res) => {
-  const handHistories = await handHistoryModel.find();
-  res.send(handHistories);
+  try {
+    const handHistories = await handHistoryModel.find();
+    res.send(handHistories);
+  } catch (error) {
+    res.status(500).send("Unable to get data");
+    console.log(error);
+  }
 });
