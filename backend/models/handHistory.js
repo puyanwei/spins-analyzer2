@@ -1,16 +1,25 @@
-import mongoose from 'mongoose';
- 
+import mongoose from "mongoose";
+
 const handHistorySchema = new mongoose.Schema(
   {
-    tournamentNumber: {
-      type: String,
-      unique: true,
-      required: true,
-    },
+    tournamentNumber: String,
+    buyIn: String,
+    rake: String,
+    totalBuyIn: String,
+    numberOfPlayers: String,
+    prizePool: String,
+    currency: String,
+    dateStarted: String,
+    timeStarted: String,
+    timeRegion: String,
+    first: String,
+    second: String,
+    third: String,
+    result: String,
   },
-  { timestamps: true },
+  { timestamps: true }
 );
- 
-const handHistory = mongoose.model('handHistory', handHistorySchema);
- 
-export default handHistory;
+
+const handHistoryModel = mongoose.model("handHistory", handHistorySchema);
+
+export { handHistoryModel };

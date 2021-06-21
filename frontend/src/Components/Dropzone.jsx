@@ -9,9 +9,7 @@ import {
 import { spinFileFormatter } from "../Utilities/spinFileFormatter";
 
 const Dropzone = (props) => {
-  // const [fileText, setFileText] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
-  // const [postData, setPostData] = useState({});
 
   const rejectedFileTypeErrorMessage = `File type invalid. Please submit a .txt file and try again`;
   const rejectedTextFileErrorMessage = `Pokerstars hand history file not recognised. Please try again`;
