@@ -1,13 +1,22 @@
-import React from "react";
+import { useHistory } from "react-router-dom";
 import Dropzone from "../Components/Dropzone";
 
 const Home = () => {
+  const history = useHistory();
   return (
-    <div>
-      <p />
-      Spins Analyzer
-      <Dropzone />
-    </div>
+    <>
+      <div>
+        <h1>Spins Analyzer</h1>
+        <Dropzone />
+        <br />
+        <br />
+        <br />
+        <br />
+        <button onClick={() => history.push("/analysis")}>
+          Go to Analysis
+        </button>
+      </div>
+    </>
   );
 };
 
