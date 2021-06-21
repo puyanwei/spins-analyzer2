@@ -9,7 +9,7 @@ app.use(cors());
 const mongoDb = "mongodb://localhost/spinAnalyser";
 mongoose.connect(mongoDb, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
-db.on("error", console.error.bind(console, "MongoDB connection error:"));
+db.on("error", (error) => console.error("MongoDB connection error:"));
 
 app.listen(5000, () => console.log("listening on 5000"));
 app.use(express.urlencoded({ extended: true }));

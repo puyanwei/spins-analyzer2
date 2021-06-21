@@ -6,7 +6,11 @@ export const spinFileFormatter = (text) => {
     "Hold'emBuy-In:"
   ).split("/");
 
-  const tournamentNumber = getElementWordBasedOnIndex(textArray, "Tournament");
+  const tournamentNumber = getElementWordBasedOnIndex(
+    textArray,
+    "Tournament"
+  ).replace(/[^0-9]/g, "");
+
   const buyIn = buyInInfo[0];
   const rake = buyInInfo[1];
 
