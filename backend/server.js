@@ -22,7 +22,7 @@ app.listen(5000, () => console.log("listening on 5000"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.post("/data", (req, res) =>
+app.post("/data", async (req, res) =>
   new handHistoryModel(req.body)
     .save()
     .then((item) => {
@@ -34,3 +34,8 @@ app.post("/data", (req, res) =>
       console.log(err);
     })
 );
+
+app.get("/data", async (req, res) => {
+  const handHistories = await handHistoryModel.find();
+  res.send(handHistories);
+});
