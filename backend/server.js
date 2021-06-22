@@ -25,8 +25,9 @@ app.use(express.json());
 app.post("/data", async (req, res) => {
   try {
     const handHistory = await handHistoryModel(req.body);
-    await handHistory.save();
-    console.log("Success");
+    const ret = await handHistory.save()
+    res.json(ret)
+    console.log("Success - Hand Submitted, Tournament ID #", req.body.tournamentNumber)
   } catch (error) {
     res.status(500).send("Unable to save to database");
     console.log(error);
