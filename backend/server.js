@@ -22,24 +22,25 @@ app.listen(5000, () => console.log("listening on 5000"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.post("/data", async (req, res) => {
+app.post("/data", async (req, res, next) => {
   try {
     const handHistory = await handHistoryModel(req.body);
-    const ret = await handHistory.save()
-    res.json(ret)
-    console.log("Success - Hand Submitted, Tournament ID #", req.body.tournamentNumber)
+    const result = await handHistory.save();
+    res.json(result);
+    console.log(
+      "Success - Hand Submitted, Tournament ID #",
+      req.body.tournamentNumber
+    );
   } catch (error) {
-    res.status(500).send("Unable to save to database");
-    console.log(error);
+    return next(error);
   }
 });
 
-app.get("/data", async (req, res) => {
+app.get("/data", async (req, res, next) => {
   try {
     const handHistories = await handHistoryModel.find();
     res.send(handHistories);
   } catch (error) {
-    res.status(500).send("Unable to get data");
-    console.log(error);
+    return next(error);
   }
 });

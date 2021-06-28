@@ -1,11 +1,7 @@
 import { VictoryPie } from "victory";
 
-const Prizepools = ({ data }) => {
-  return (
-    <div>
-      <VictoryPie data={data} colorScale={["tomato", "gold", "cyan", "navy"]} />
-    </div>
-  );
-};
+const Prizepools = ({ data }) => (
+  <VictoryPie data={data} colorScale={["tomato", "gold", "cyan", "navy"]} />
+);
 
 export default Prizepools;
