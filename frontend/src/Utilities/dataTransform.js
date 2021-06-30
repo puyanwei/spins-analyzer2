@@ -1,30 +1,19 @@
-import { hashToVictoryJSArray, getPercentage } from "./common";
+import { hashToVictoryJSArray, getPercentage, countHashKeys } from "./common";
 
 const prizePoolTransform = (data) => {
-  const hash = {};
-  let total = 0;
+  const prizePoolCountHash = countHashKeys(data, "prizePool");
 
-  data.forEach((obj) => {
-    total = total + 1;
-    const prizePool = obj.prizePool;
-    hash[prizePool] = hash[prizePool] ? hash[prizePool] + 1 : 1;
-  });
-
-  return Object.entries(hash).map(([key, value]) => {
+  return Object.entries(prizePoolCountHash).map(([key, value]) => {
     return {
-      x: `${key} \n ${getPercentage(value, total)}%`,
+      x: `${key} \n ${getPercentage(value, data.length)}%`,
       y: value,
     };
   });
 };
 
 const finishPositionTransform = (data) => {
-  const hash = {};
-  data.forEach((obj) => {
-    const result = obj.result;
-    hash[result] = hash[result] ? hash[result] + 1 : 1;
-  });
-  return hashToVictoryJSArray(hash);
+  const resultCountHash = countHashKeys(data, "result");
+  return hashToVictoryJSArray(resultCountHash);
 };
 
 export { prizePoolTransform, finishPositionTransform };
