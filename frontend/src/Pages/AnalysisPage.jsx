@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { prizePoolTransform } from "../Utilities/dataTransform";
 import { countHashKeys } from "../Utilities/common";
 
 import Prizepools from "../Components/Prizepools";
@@ -18,19 +17,19 @@ const AnalysisPage = () => {
   return (
     <div>
       <h1>Analysis Page</h1>
-      <CenteringStyle>
-        <Prizepools data={prizePoolTransform(handHistoryData)} />
-      </CenteringStyle>
-      <CenteringStyle>
+      <GraphStyle>
+        <Prizepools data={countHashKeys(handHistoryData, "prizePool")} />
+      </GraphStyle>
+      <GraphStyle>
         <OpponentRegion data={countHashKeys(handHistoryData, "result")} />
-      </CenteringStyle>
+      </GraphStyle>
     </div>
   );
 };
 
-const CenteringStyle = styled.div`
+const GraphStyle = styled.div`
   display: block;
-  margin: 0 auto;
+  margin: 3rem auto;
   width: 30rem;
 `;
 
