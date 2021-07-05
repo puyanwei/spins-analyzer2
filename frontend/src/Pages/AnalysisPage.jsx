@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import {
-  finishPositionTransform,
-  prizePoolTransform,
-} from "../Utilities/dataTransform";
+import { prizePoolTransform } from "../Utilities/dataTransform";
+import { countHashKeys } from "../Utilities/common";
 
 import Prizepools from "../Components/Prizepools";
-import FinishPositions from "../Components/FinishPositions";
+import OpponentRegion from "../Components/OpponentRegion";
 
 const AnalysisPage = () => {
   const [handHistoryData, setHandHistoryData] = useState([]);
@@ -24,7 +22,7 @@ const AnalysisPage = () => {
         <Prizepools data={prizePoolTransform(handHistoryData)} />
       </CenteringStyle>
       <CenteringStyle>
-        <FinishPositions data={finishPositionTransform(handHistoryData)} />
+        <OpponentRegion data={countHashKeys(handHistoryData, "result")} />
       </CenteringStyle>
     </div>
   );
