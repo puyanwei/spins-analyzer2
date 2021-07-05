@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import styled from "styled-components";
 import {
   finishPositionTransform,
   prizePoolTransform,
@@ -19,10 +20,20 @@ const Analysis = () => {
   return (
     <div>
       <h1>Analysis Page</h1>
-      <Prizepools data={prizePoolTransform(handHistoryData)} />
-      <FinishPositions data={finishPositionTransform(handHistoryData)} />
+      <CenteringWrapper>
+        <Prizepools data={prizePoolTransform(handHistoryData)} />
+      </CenteringWrapper>
+      <CenteringWrapper>
+        <FinishPositions data={finishPositionTransform(handHistoryData)} />
+      </CenteringWrapper>
     </div>
   );
 };
+
+const CenteringWrapper = styled.div`
+  display: block;
+  margin: 0 auto;
+  width: 30rem;
+`;
 
 export default Analysis;
