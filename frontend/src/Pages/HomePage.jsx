@@ -1,7 +1,7 @@
 import { useHistory } from "react-router-dom";
 import Dropzone from "../Components/Dropzone";
 
-const Home = () => {
+const HomePage = () => {
   const history = useHistory();
   return (
     <>
@@ -20,4 +20,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;

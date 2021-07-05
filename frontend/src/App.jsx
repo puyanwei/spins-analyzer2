@@ -6,17 +6,17 @@ import {
 } from "react-router-dom";
 
 import "./App.css";
-import Home from "./Pages/Home";
-import Analysis from "./Pages/Analysis";
-import NotFound from "./Pages/NotFound";
+import HomePage from "./Pages/HomePage";
+import AnalysisPage from "./Pages/AnalysisPage";
+import NotFoundPage from "./Pages/NotFoundPage";
 
 const App = () => (
   <div className="App">
     <Router>
       <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/analysis" component={Analysis} />
-        <Route component={NotFound} />
+        <Route exact path="/" component={HomePage} />
+        <Route path="/analysis" component={AnalysisPage} />
+        <Route component={NotFoundPage} />
         <Redirect to="/404" />
       </Switch>
     </Router>

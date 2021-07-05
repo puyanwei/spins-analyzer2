@@ -8,7 +8,7 @@ import {
 import Prizepools from "../Components/Prizepools";
 import FinishPositions from "../Components/FinishPositions";
 
-const Analysis = () => {
+const AnalysisPage = () => {
   const [handHistoryData, setHandHistoryData] = useState([]);
 
   useEffect(() => {
@@ -20,20 +20,20 @@ const Analysis = () => {
   return (
     <div>
       <h1>Analysis Page</h1>
-      <CenteringWrapper>
+      <CenteringStyle>
         <Prizepools data={prizePoolTransform(handHistoryData)} />
-      </CenteringWrapper>
-      <CenteringWrapper>
+      </CenteringStyle>
+      <CenteringStyle>
         <FinishPositions data={finishPositionTransform(handHistoryData)} />
-      </CenteringWrapper>
+      </CenteringStyle>
     </div>
   );
 };
 
-const CenteringWrapper = styled.div`
+const CenteringStyle = styled.div`
   display: block;
   margin: 0 auto;
   width: 30rem;
 `;
 
-export default Analysis;
+export default AnalysisPage;
