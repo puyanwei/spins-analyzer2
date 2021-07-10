@@ -1,11 +1,13 @@
-import { Bar } from "react-chartjs-2";
+import React from "react";
+import { Pie } from "react-chartjs-2";
+import { ChartStyle } from "../../shared/chartStyle";
 
-const OpponentRegion = ({ data }) => {
+const PieChart = ({ data }) => {
   const chartsData = {
     labels: Object.keys(data),
     datasets: [
       {
-        label: "Finish positions",
+        label: "Prizepool Distribution",
         data: Object.values(data),
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
@@ -28,18 +30,11 @@ const OpponentRegion = ({ data }) => {
     ],
   };
 
-  const options = {
-    scales: {
-      yAxes: [
-        {
-          ticks: {
-            beginAtZero: true,
-          },
-        },
-      ],
-    },
-  };
-  return <Bar data={chartsData} options={options} />;
+  return (
+    <ChartStyle>
+      <Pie data={chartsData} />
+    </ChartStyle>
+  );
 };
 
-export default OpponentRegion;
+export default PieChart;

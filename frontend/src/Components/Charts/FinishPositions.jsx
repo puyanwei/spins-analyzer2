@@ -1,12 +1,12 @@
-import React from "react";
-import { Pie } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
+import { ChartStyle } from "../../shared/chartStyle";
 
-const PieChart = ({ data }) => {
+const FinishPositions = ({ data }) => {
   const chartsData = {
     labels: Object.keys(data),
     datasets: [
       {
-        label: "# of Votes",
+        label: "Finish positions",
         data: Object.values(data),
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
@@ -28,7 +28,23 @@ const PieChart = ({ data }) => {
       },
     ],
   };
-  return <Pie data={chartsData} />;
+
+  const options = {
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true,
+          },
+        },
+      ],
+    },
+  };
+  return (
+    <ChartStyle width={50}>
+      <Bar data={chartsData} options={options} />
+    </ChartStyle>
+  );
 };
 
-export default PieChart;
+export default FinishPositions;

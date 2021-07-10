@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components";
 import { countHashKeys } from "../Utilities/common";
 
-import Prizepools from "../Components/Prizepools";
-import OpponentRegion from "../Components/OpponentRegion";
+import Prizepools from "../Components/Charts/Prizepools";
+import OpponentCountries from "../Components/Charts/OpponentCountries";
+import FinishPositions from "../Components/Charts/FinishPositions";
 
 const AnalysisPage = () => {
   const [handHistoryData, setHandHistoryData] = useState([]);
@@ -14,23 +14,20 @@ const AnalysisPage = () => {
       .then((data) => setHandHistoryData(data));
   }, []);
 
+  const opponentCountriesCount = {
+    ...countHashKeys(handHistoryData, "firstCountry"),
+    ...countHashKeys(handHistoryData, "secondCountry"),
+    ...countHashKeys(handHistoryData, "thirdCountry"),
+  };
+
   return (
     <div>
       <h1>Analysis Page</h1>
-      <GraphStyle>
-        <Prizepools data={countHashKeys(handHistoryData, "prizePool")} />
-      </GraphStyle>
-      <GraphStyle>
-        <OpponentRegion data={countHashKeys(handHistoryData, "result")} />
-      </GraphStyle>
+      <Prizepools data={countHashKeys(handHistoryData, "prizePool")} />
+      <FinishPositions data={countHashKeys(handHistoryData, "result")} />
+      <OpponentCountries data={opponentCountriesCount} />
     </div>
   );
 };
-
-const GraphStyle = styled.div`
-  display: block;
-  margin: 3rem auto;
-  width: 30rem;
-`;
 
 export default AnalysisPage;
