@@ -13,8 +13,11 @@ const handHistorySchema = new mongoose.Schema(
     timeStarted: String,
     timeRegion: String,
     first: String,
+    firstCountry: String,
     second: String,
+    secondCountry: String,
     third: String,
+    thirdCountry: String,
     result: String,
   },
   { timestamps: true }

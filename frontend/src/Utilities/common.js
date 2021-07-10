@@ -1,11 +1,3 @@
-const hashToVictoryJSArray = (hash) =>
-  Object.entries(hash).map(([key, value]) => {
-    return {
-      x: key,
-      y: value,
-    };
-  });
-
 const getPercentage = (numerator, total) =>
   ((numerator / total) * 100).toFixed(2);
 
@@ -18,4 +10,7 @@ const countHashKeys = (data, keyToCount) => {
   return hash;
 };
 
-export { hashToVictoryJSArray, getPercentage, countHashKeys };
+const getElementWordBasedOnIndex = (array, string, elementMovement = 1) =>
+  array[array.indexOf(string) + elementMovement];
+
+export { getPercentage, countHashKeys, getElementWordBasedOnIndex };
